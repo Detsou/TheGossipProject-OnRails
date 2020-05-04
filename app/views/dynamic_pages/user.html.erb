@@ -1,0 +1,24 @@
+<html>
+  <head>
+    <title>The Gossip Project</title>
+  </head>
+  <body>
+    <div class="container py-4 text-center">
+    <% user = User.find(params['id']) %>
+      <h1>Profil de <%= user.first_name %> <%= user.last_name %></h1>
+      <br>
+      <div class="card pt-2">
+        <div class="card-body text-left ">
+          <p>
+            Prénom : <%= user.first_name %> <br/>
+            Nom : <%= user.last_name %> <br/>
+            Âge : <%= user.age %> <br/>
+            Ville : <%= user.city.name %> <br/>
+            Description : <%= user.description %> <br/>
+            Email : <%= user.email %>
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

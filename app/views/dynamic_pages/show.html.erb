@@ -1,0 +1,24 @@
+<html>
+  <head>
+    <title>The Gossip Project</title>
+  </head>
+  <body>
+    <div class="container py-4 text-center">
+      <h1>Gossip n°<%= params['id']%></h1>
+      <br>
+      <div class="card pt-2">
+        <div class="card-body text-left ">
+          <% gossip = Gossip.find(params['id']) %>
+          <p>
+            De : <%= link_to "#{gossip.user.first_name} #{gossip.user.last_name}", user_path(gossip.user.id) %> <br/>
+            Le : <%= gossip.created_at %>
+          </p>
+          <p>
+            <%= gossip.title %> <br/>
+            <%= gossip.content %>
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,23 @@
+<html>
+  <head>
+    <title>Accueil</title>
+  </head>
+  <body>
+    <div class="container py-3 text-center">
+      <h1>Bienvenue à toi !</h1>
+
+      <h2>Voici la liste des potins :</h2>
+      <br>
+      <% Gossip.all.each_with_index do |gossip, index| %>
+        <a href="gossips/<%=index + 1%>/">
+          <%= index + 1 %>.
+          <%= gossip.user.first_name %>: </a> <br/>
+        <p>
+          Titre : <%= gossip.title %> <br/>
+          Contenu : <%= gossip.content %>
+        </p>
+        <br>
+      <% end %>
+    </div>
+  </body>
+</html>
