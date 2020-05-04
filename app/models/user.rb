@@ -5,8 +5,4 @@ class User < ApplicationRecord
   has_many :received_messages, foreign_key: 'recipient_id', class_name: "PrivateMessage"
   has_many :comments
 
-  def self.find(id)
-    all_users = self.all
-    all_users[id.to_i - 1]
-  end
 end

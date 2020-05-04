@@ -8,9 +8,9 @@
 
       <h2>Voici la liste des potins :</h2>
       <br>
-      <% Gossip.all.each_with_index do |gossip, index| %>
-        <a href="gossips/<%=index + 1%>/">
-          <%= index + 1 %>.
+      <% Gossip.all.each do |gossip| %>
+        <a href="gossips/<%=gossip.id%>/">
+          <%= gossip.id %>.
           <%= gossip.user.first_name %>: </a> <br/>
         <p>
           Titre : <%= gossip.title %> <br/>
