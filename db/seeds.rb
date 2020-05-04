@@ -19,7 +19,7 @@ end
   user = User.create!(
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
-    description: Faker::Lorem.sentence(word_count: 10),
+    description: Faker::TvShows::Community.quotes,
     email: Faker::Internet.email,
     age: rand(18..28),
     city: City.all.sample
@@ -34,8 +34,8 @@ end
 
 20.times do
   gossip = Gossip.create!(
-    title: Faker::Lorem.sentence(word_count: 3),
-    content: Faker::Lorem.sentence(word_count: 10),
+    title: Faker::Book.title,
+    content: Faker::Movie.quote,
     user: User.all.sample,
   )
 end
