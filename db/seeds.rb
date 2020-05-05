@@ -34,7 +34,7 @@ end
 
 20.times do
   gossip = Gossip.create!(
-    title: Faker::Book.title,
+    title: Faker::Lorem.characters(number: 11),
     content: Faker::Movie.quote,
     user: User.all.sample,
   )
