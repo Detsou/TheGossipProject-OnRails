@@ -32,10 +32,18 @@ end
   )
 end
 
-20.times do
+10.times do
   gossip = Gossip.create!(
-    title: Faker::Lorem.characters(number: 11),
-    content: Faker::Movie.quote,
+    title: Faker::Book.title,
+    content: Faker::Quote.unique.famous_last_words,
+    user: User.all.sample,
+  )
+end
+
+10.times do
+  gossip = Gossip.create!(
+    title: Faker::Book.title,
+    content: Faker::Movie.unique.quote,
     user: User.all.sample,
   )
 end

@@ -1,0 +1,22 @@
+<html>
+  <head>
+  </head>
+  <body>
+    <% if @gossip.errors.any? %>
+    <div class="alert alert-danger pt-3 pb-0" role="alert">
+        <p>Nous n'avons pas réussi à modifier le gossip pour la (ou les) raison(s) suivante(s) :</p>
+        <ul>
+          <% @gossip.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+    </div>
+    <% end %>
+    <div class="container text-center mt-5">
+      <h1 style="color: #053557">Tu veux modifier le Gossip suivant ?</h1>
+      <div class="m-5">
+
+      </div>
+    </div>
+  </body>
+</html>

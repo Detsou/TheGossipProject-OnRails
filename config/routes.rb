@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :gossips
   resources :users, only: [:show]
+  resources :cities, only: [:show]
   
   root 'gossips#index'
   get '/welcome/:id', to: 'welcome#show', as: 'welcome'

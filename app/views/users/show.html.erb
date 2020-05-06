@@ -10,7 +10,7 @@
         <img class="m-auto p-1" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/512px-Circle-icons-profile.svg.png" alt="profile picture" height="200px" width="200px">
         <div class="card-body text-left my-auto">
           <p><b style="color: #053557">Âge</b> : <%= user.age %></p>
-          <p><b style="color: #053557">Ville</b> : <%= user.city.name %></p>
+          <p><b style="color: #053557">Ville</b> : <%= link_to "#{user.city.name}", city_path(user.city.id) %></p>
           <p><b style="color: #053557">Email</b> : <%= user.email %></p><br/>
           <p><b style="color: #053557">Description</b> :<br/>
             <%= user.description %>

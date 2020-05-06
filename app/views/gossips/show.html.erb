@@ -8,12 +8,12 @@
       <div class="card mx-5">
         <div class="card-body text-center py-5">
           <% gossip = Gossip.find(params['id']) %>
-          <h5><%= gossip.title %></h5>
+          <h4 style="color: #053557; font-weight: 450;"><%= gossip.title %></h4>
           <p><%= gossip.content %></p>
         </div>
         <div class="card-footer">
           <p class="small text-right text-muted">
-            Posté par <%= link_to "#{gossip.user.first_name} #{gossip.user.last_name}", user_path(gossip.user.id) %> le <%= gossip.created_at.strftime("%d/%m/%Y") %> à <%= gossip.created_at.strftime("%H:%I") %>.
+            Posté par <%= link_to "#{gossip.user.first_name} #{gossip.user.last_name}", user_path(gossip.user.id) %> (<%= link_to "#{gossip.user.city.name}", city_path(gossip.user.city.id) %>), le <%= gossip.created_at.strftime("%d/%m/%Y") %> à <%= gossip.created_at.strftime("%H:%I") %>.
           </p>
         </div>
       </div>

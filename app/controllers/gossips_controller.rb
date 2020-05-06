@@ -17,7 +17,7 @@ class GossipsController < ApplicationController
     @gossip = Gossip.new(user: User.first, title: params[:title], content: params[:content])
 
     if @gossip.save
-      redirect_to "/", flash: {success: "Ton Gossip a été créé avec succès !"}
+      redirect_to @gossip, flash: {success: "Ton Gossip a été créé avec succès !"}
     else
       render :new
     end
@@ -27,8 +27,11 @@ class GossipsController < ApplicationController
   end
 
   def update
-    @gossip.update(gossip_params)
-    redirect_to gossip_path(@gossip.id)
+    if @gossip.update(gossip_params)
+      redirect_to @gossip, flash: {success: "Ton Gossip a été modifié avec succès !"}
+    else
+      render :edit
+    end
   end
 
   def destroy
