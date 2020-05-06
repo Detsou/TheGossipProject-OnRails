@@ -7,14 +7,15 @@ class GossipsController < ApplicationController
   end
 
   def show
+    @comment = Comment.new
   end
 
   def new
-    @gossip = Gossip.new(user: User.first, title: "", content: "")
+    @gossip = Gossip.new
   end
 
   def create
-    @gossip = Gossip.new(user: User.first, title: params[:title], content: params[:content])
+    @gossip = Gossip.new(user: User.all.sample, title: params[:title], content: params[:content])
 
     if @gossip.save
       flash[:success] = "Ton Gossip a été créé avec succès !"
@@ -37,7 +38,7 @@ class GossipsController < ApplicationController
 
   def destroy
     @gossip.destroy
-    redirect_to "/"
+    redirect_to gossips_path
   end
 
   private

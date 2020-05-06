@@ -2,21 +2,58 @@
   <head>
   </head>
   <body>
-    <div class="container py-4 text-center">
-      <h1 style="color: #053557">Gossip n°<%= params['id']%></h1>
+    <div class="container px-5 my-5">
+      <h1 style="color: #053557" class="text-center">Gossip n°<%= params['id']%></h1>
       <br>
-      <div class="card mx-5">
+      <div class="card">
         <div class="card-body text-center py-5">
-          <% gossip = Gossip.find(params['id']) %>
-          <h4 style="color: #053557; font-weight: 450;"><%= gossip.title %></h4>
-          <p><%= gossip.content %></p>
+          <h4 style="color: #053557; font-weight: 450;"><%= @gossip.title %></h4>
+          <p><%= @gossip.content %></p>
         </div>
         <div class="card-footer">
           <p class="small text-right text-muted">
-            Posté par <%= link_to "#{gossip.user.first_name} #{gossip.user.last_name}", user_path(gossip.user.id) %> (<%= link_to "#{gossip.user.city.name}", city_path(gossip.user.city.id) %>), le <%= gossip.created_at.strftime("%d/%m/%Y") %> à <%= gossip.created_at.strftime("%H:%I") %>.
+            Posté par <%= link_to "#{@gossip.user.first_name} #{@gossip.user.last_name}", user_path(@gossip.user.id) %> (<%= link_to "#{@gossip.user.city.name}", city_path(@gossip.user.city.id) %>), le <%= @gossip.created_at.strftime("%d/%m/%Y") %> à <%= @gossip.created_at.strftime("%H:%I") %>.
           </p>
         </div>
       </div>
+
+      <div class="btn-toolbar mx-3" role="toolbar" aria-label="Toolbar with button groups">
+        <div class="btn-group mr-2" role="group">
+          <a href="<%= gossips_path %>" class="btn btn-dark mt-3 mx-1">Retour</a>
+        </div>
+        <div class="btn-group mr-2" role="group">
+          <a href="<%= edit_gossip_path(@gossip.id) %>" class="btn btn-dark mt-3 mx-1">Modifier</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="container px-5 mb-5">
+
+
+      <%= form_tag url_for(:controller => "comments", :action => "create"), method: 'post' do %>
+        <input id="gossip" name="gossip_id" type="hidden" value="<%=@gossip.id%>" />
+        <div class="form-group">
+        <%= text_area_tag 'content', @comment.content, class: 'form-control', placeholder: 'Contenu' %>
+        </div> 
+
+        <div class="btn-group d-flex justify-content-end mb-3 mx-3" role="group">
+          <%= submit_tag "Commenter", class: "btn btn-dark mx-1" %> 
+        </div>
+      <% end %>
+
+
+      <% x = 1 %>
+      <% @gossip.comments.each do |comment| %>
+          <div class="card my-2">
+            <div class="card-body<%= " text-right" if x % 2 == 0 %>">
+              <p class="small text-muted">
+                Commenté par <%= link_to "#{comment.user.first_name} #{comment.user.last_name}", user_path(@gossip.user.id) %> (<%= link_to "#{comment.user.city.name}", city_path(comment.user.city.id) %>), le <%= comment.created_at.strftime("%d/%m/%Y") %> à <%= comment.created_at.strftime("%H:%I") %>.
+              </p>
+              <p><%= comment.content %></p>
+            </div>
+          </div>
+        <% x += 1 %>
+      <% end %>
     </div>
   </body>
 </html>

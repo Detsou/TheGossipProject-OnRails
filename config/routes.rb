@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   resources :gossips
+  resources :comments
+
   resources :users, only: [:show]
   resources :cities, only: [:show]
   
