@@ -5,8 +5,8 @@ class Gossip < ApplicationRecord
   has_many :comments
 
   validates :title,
-    presence: true,
-    length: { minimum: 4, maximum: 60, message: "= Le titre ne peut pas faire moins de 3 caractères ni plus de 60 caractères."}
+    presence: { message: "Titre obligatoire." },
+    length: { minimum: 4, maximum: 60, message: "Le titre ne peut pas faire moins de 3 caractères ni plus de 60 caractères."}
   validates :content,
-    presence: true
+    presence: { message: "Contenu obligatoire." }
 end
