@@ -1,10 +1,9 @@
 <html>
   <head>
-    <title>The Gossip Project</title>
   </head>
   <body>
     <% if @gossip.errors.any? %>
-    <div class="alert alert-danger pt-2 pb-0" role="alert">
+    <div class="alert alert-danger pt-3 pb-0" role="alert">
         <p>Nous n'avons pas réussi à créer le gossip pour la (ou les) raison(s) suivante(s) :</p>
         <ul>
           <% @gossip.errors.full_messages.each do |message| %>
@@ -19,14 +18,14 @@
         <%= form_tag url_for(action: 'create'), method: "post" do %>
 
           <%= label_tag 'Titre' %> <br/>
-          <%= text_field_tag 'title', @gossip.title, {class: 'col-6'} %>
+          <%= text_field_tag 'title', @gossip.title, class: 'form-control', placeholder: 'Titre' %>
           <br /> <br />
 
           <%= label_tag 'Contenu' %> <br/>
-          <%= text_area_tag 'content', @gossip.content, {class: 'col-6'} %>
+          <%= text_area_tag 'content', @gossip.content, class: 'form-control', placeholder: 'Contenu' %>
           <br /> <br />
 
-          <%= submit_tag "Créer" %> 
+          <%= submit_tag "Créer", class: "btn btn-outline-dark" %> 
         <% end %>
       </div>
     </div>
