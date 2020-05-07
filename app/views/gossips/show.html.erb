@@ -21,24 +21,30 @@
         <div class="btn-group mr-2" role="group">
           <a href="<%= gossips_path %>" class="btn btn-dark mt-3 mx-1">Retour</a>
         </div>
-        <div class="btn-group mr-2" role="group">
-          <a href="<%= edit_gossip_path(@gossip.id) %>" class="btn btn-dark mt-3 mx-1">Modifier</a>
-        </div>
+        <% if logged_in? %>
+          <div class="btn-group mr-2" role="group">
+            <a href="<%= edit_gossip_path(@gossip.id) %>" class="btn btn-dark mt-3 mx-1">Modifier</a>
+          </div>
+          <div class="btn-group mr-2" role="group">
+            <a href="<%= gossip_path(@gossip.id) %>" class="btn btn-danger mt-3 mx-1" data-confirm="Êtes-vous sûrs de vouloir le supprimer ?" data-method="DELETE">Supprimer</a>
+          </div>
+        <% end %>
       </div>
     </div>
 
     <div class="container px-5 mb-5">
+      <% if logged_in? %>
+        <p class="small text-muted ml-2 mb-1"><span style="color: #053557"><%= current_user.full_name %></span> :</p>
+        <%= form_tag url_for(:controller => "comments", :action => "create"), method: 'post' do %>
+          <input id="gossip" name="gossip_id" type="hidden" value="<%=@gossip.id%>" />
+          <div class="form-group">
+          <%= text_area_tag 'content', @comment.content, class: 'form-control', placeholder: 'Commenter ce gossip' %>
+          </div> 
 
-
-      <%= form_tag url_for(:controller => "comments", :action => "create"), method: 'post' do %>
-        <input id="gossip" name="gossip_id" type="hidden" value="<%=@gossip.id%>" />
-        <div class="form-group">
-        <%= text_area_tag 'content', @comment.content, class: 'form-control', placeholder: 'Contenu' %>
-        </div> 
-
-        <div class="btn-group d-flex justify-content-end mb-3 mx-3" role="group">
-          <%= submit_tag "Commenter", class: "btn btn-dark mx-1" %> 
-        </div>
+          <div class="btn-group d-flex justify-content-end mb-3 mx-3" role="group">
+            <%= submit_tag "Commenter", class: "btn btn-dark mx-1" %> 
+          </div>
+        <% end %>
       <% end %>
 
 

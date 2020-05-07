@@ -22,7 +22,8 @@ end
     description: Faker::TvShows::Community.quotes,
     email: Faker::Internet.email,
     age: rand(18..28),
-    city: City.all.sample
+    city: City.all.sample,
+    password: Faker::Lorem.characters(number: 10)
   )
 end
 

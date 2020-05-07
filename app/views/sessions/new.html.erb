@@ -1,0 +1,35 @@
+<html>
+  <head>
+  </head>
+
+  <body>
+
+    <div class="container py-5 text-center">
+      <h1 style="color: #053557">Connexion</h1>
+
+      <div class="m-5 px-5">
+        <%= form_for :user, url: sessions_path do |f| %>
+
+          <div class="form-group">
+            <%= f.text_field :email, class: 'form-control', placeholder: 'Email' %>
+          </div>
+          <div class="form-group">
+            <%= f.password_field :password, class: 'form-control', placeholder: 'Mot de passe' %>
+          </div>
+
+          <div class="btn-toolbar mx-3" role="toolbar" aria-label="Toolbar with button groups">
+            <div class="btn-group mr-2" role="group">
+              <a href="<%= gossips_path %>" class="btn btn-dark mx-1">Retour</a>
+            </div>
+            <div class="btn-group mr-2" role="group">
+              <%= submit_tag "Se connecter", class: "btn btn-success mx-1" %> 
+            </div>
+          </div>
+
+        <% end %>
+      </div>
+    </div>
+
+  </body>
+
+</html>

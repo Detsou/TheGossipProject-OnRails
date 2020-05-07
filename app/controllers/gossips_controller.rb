@@ -1,6 +1,7 @@
 class GossipsController < ApplicationController
  
   before_action :set_gossip, only: [:show, :edit, :update, :destroy]
+  before_action :only_signed_in, only: [:new, :create, :edit, :update, :destroy]
 
   def index
     @gossip = Gossip.all
@@ -15,7 +16,7 @@ class GossipsController < ApplicationController
   end
 
   def create
-    @gossip = Gossip.new(user: User.all.sample, title: params[:title], content: params[:content])
+    @gossip = Gossip.new(user: current_user, title: params[:title], content: params[:content])
 
     if @gossip.save
       flash[:success] = "Ton Gossip a été créé avec succès !"
@@ -38,6 +39,7 @@ class GossipsController < ApplicationController
 
   def destroy
     @gossip.destroy
+    flash[:danger] = "Le gossip a été supprimé."
     redirect_to gossips_path
   end
 
