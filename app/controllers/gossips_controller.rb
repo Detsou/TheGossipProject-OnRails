@@ -2,6 +2,7 @@ class GossipsController < ApplicationController
  
   before_action :set_gossip, only: [:show, :edit, :update, :destroy]
   before_action :only_signed_in, only: [:new, :create, :edit, :update, :destroy]
+  before_action :act_on_my_gossips?, only: [:edit, :update, :destroy]
 
   def index
     @gossip = Gossip.all
@@ -51,5 +52,16 @@ class GossipsController < ApplicationController
 
   def set_gossip
     @gossip = Gossip.find(params[:id])
+  end
+
+  def my_gossips?
+    current_user.id == set_gossip.user.id
+  end
+
+  def act_on_my_gossips?
+    if !my_gossips?
+      flash[:danger] = "Vous ne pouvez modifier/supprimer que vos propres Gossips."
+      redirect_to @gossip
+    end
   end
 end

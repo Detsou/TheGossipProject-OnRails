@@ -12,7 +12,7 @@
         </div>
         <div class="card-footer">
           <p class="small text-right text-muted">
-            Posté par <%= link_to "#{@gossip.user.first_name} #{@gossip.user.last_name}", user_path(@gossip.user.id) %> (<%= link_to "#{@gossip.user.city.name}", city_path(@gossip.user.city.id) %>), le <%= @gossip.created_at.strftime("%d/%m/%Y") %> à <%= @gossip.created_at.strftime("%H:%I") %>.
+            Posté par <%= link_to "#{@gossip.user.first_name} #{@gossip.user.last_name}", user_path(@gossip.user.id) %> (<%= link_to "#{@gossip.user.city.name}", city_path(@gossip.user.city.id) %>), le <%= @gossip.created_at.strftime("%d/%m/%Y") %> à <%= @gossip.created_at.strftime("%H:%M") %>.
           </p>
         </div>
       </div>
@@ -21,9 +21,9 @@
         <div class="btn-group mr-2" role="group">
           <a href="<%= gossips_path %>" class="btn btn-dark mt-3 mx-1">Retour</a>
         </div>
-        <% if logged_in? %>
+        <% if logged_in? && current_user?(@gossip.user) %>
           <div class="btn-group mr-2" role="group">
-            <a href="<%= edit_gossip_path(@gossip.id) %>" class="btn btn-dark mt-3 mx-1">Modifier</a>
+            <a href="<%= edit_gossip_path(@gossip.id) %>" class="btn btn-success mt-3 mx-1">Modifier</a>
           </div>
           <div class="btn-group mr-2" role="group">
             <a href="<%= gossip_path(@gossip.id) %>" class="btn btn-danger mt-3 mx-1" data-confirm="Êtes-vous sûrs de vouloir le supprimer ?" data-method="DELETE">Supprimer</a>
@@ -47,19 +47,23 @@
         <% end %>
       <% end %>
 
-
-      <% x = 1 %>
-      <% @gossip.comments.each do |comment| %>
-          <div class="card my-2">
-            <div class="card-body<%= " text-right" if x % 2 == 0 %>">
-              <p class="small text-muted">
-                Commenté par <%= link_to "#{comment.user.first_name} #{comment.user.last_name}", user_path(@gossip.user.id) %> (<%= link_to "#{comment.user.city.name}", city_path(comment.user.city.id) %>), le <%= comment.created_at.strftime("%d/%m/%Y") %> à <%= comment.created_at.strftime("%H:%I") %>.
-              </p>
-              <p><%= comment.content %></p>
+      <div class="mt-5">
+        <% x = 1 %>
+        <% @gossip.comments.each do |comment| %>
+            <div class="card my-2">
+              <div class="card-body<%= " text-right" if x % 2 == 0 %>">
+                <p class="small text-muted">
+                  Commenté par <%= link_to "#{comment.user.first_name} #{comment.user.last_name}", user_path(@gossip.user.id) %> (<%= link_to "#{comment.user.city.name}", city_path(comment.user.city.id) %>), le <%= comment.created_at.strftime("%d/%m/%Y") %> à <%= comment.created_at.strftime("%H:%M") %>.
+                  <% if current_user?(comment.user) %>
+                  <%= link_to "∅", edit_comment_path(comment.id), style:"color: green;" %> <%= link_to "X", edit_comment_path(comment.id), style:"color: red;" %>
+                  <% end %>
+                </p>
+                <p><%= comment.content %></p>
+              </div>
             </div>
-          </div>
-        <% x += 1 %>
-      <% end %>
+          <% x += 1 %>
+        <% end %>
+      </div>
     </div>
   </body>
 </html>

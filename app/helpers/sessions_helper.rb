@@ -17,4 +17,9 @@ module SessionsHelper
       redirect_to new_session_path
     end
   end
+
+  def current_user?(user)
+    user == current_user
+  end
+  
 end

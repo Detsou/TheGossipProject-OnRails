@@ -15,5 +15,14 @@
  */
 
  a {
-   color: #053557;
+    color: #053557;
  }
+ 
+ a:hover {
+    text-decoration: none;
+ }
+
+ .jumbotron {
+  background-image: url("");
+  background-size: cover;
+}

@@ -12,17 +12,18 @@
         </ul>
     </div>
     <% end %>
-    <div class="container text-center mt-5">
-      <h1 style="color: #053557">Modifier le commentaire ?</h1>
+    <div class="container mt-5">
+      <h1 style="color: #053557" class="text-center">Modifier le commentaire ?</h1>
 
       <div class="m-5 px-5">
+        <p class="ml-3 mb-1"><span style="color: #053557"><%= current_user.full_name %></span> :</p>
         <%= form_tag comment_path, method: "put" do %>
           <div class="form-group">
             <%= text_area_tag 'content', @comment.content, class: 'form-control' %>
           </div>
           <div class="btn-toolbar mx-3" role="toolbar" aria-label="Toolbar with button groups">
             <div class="btn-group mr-2" role="group">
-              <a href="<%= comment_path(@comment.id) %>" class="btn btn-dark mx-1">Retour</a>
+              <a href="<%= gossip_path(@comment.gossip.id) %>" class="btn btn-dark mx-1">Retour</a>
             </div>
             <div class="btn-group mr-2" role="group">
               <button type="submit" class="btn btn-success mx-1">Modifier</button>

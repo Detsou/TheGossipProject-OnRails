@@ -2,6 +2,7 @@ class CommentsController < ApplicationController
 
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
   before_action :only_signed_in, only: [:new, :create, :edit, :update, :destroy]
+  before_action :act_on_my_comments?, only: [:edit, :update, :destroy]
 
   def index
     @comment = Comment.all
@@ -56,5 +57,16 @@ class CommentsController < ApplicationController
 
   def set_comment
     @comment = Comment.find(params[:id])
+  end
+
+  def my_comments?
+    current_user.id == set_comment.user.id
+  end
+
+  def act_on_my_comments?
+    if !my_comments?
+      flash[:danger] = "Vous ne pouvez modifier/supprimer que vos propres commentaires."
+      redirect_to gossip_path(id: @comment.gossip.id)
+    end
   end
 end

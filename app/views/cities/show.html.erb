@@ -19,6 +19,12 @@
                   <p class="card-text"><%= gossip.content %></p>
                 </div>
                 <div class="card-footer">
+                  <a href="<%= gossip_path(gossip.id) %>">
+                    <p class="small float-left text-muted pr-2"><%= gossip.comments.count %> 💬</p> 
+                  </a>
+                  <a href="<%= gossip_path(gossip.id) %>">
+                    <p class="small float-left text-muted"><%= gossip.comments.count %> 🤍</p>
+                  </a>
                   <p class="small text-right text-muted">Posté par <%= link_to "#{gossip.user.first_name}", user_path(gossip.user.id) %></p>
                 </div>
               </div>
