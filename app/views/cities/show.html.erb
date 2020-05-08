@@ -4,7 +4,7 @@
   <body>
     <div class="container py-5 text-center">
       <% city = City.find(params['id']) %>
-      <h2 style="color: #053557" class="pb-3">Tous les gossips à <%= city.name %> :</h2>
+      <h1 style="color: #053557" class="pb-3">Tous les gossips à <%= city.name %> :</h1>
       <br/>
 
       <div class="card-deck">
@@ -18,15 +18,32 @@
                   </h5>
                   <p class="card-text"><%= gossip.content %></p>
                 </div>
-                <div class="card-footer">
+
+              <div class="card-footer">
+                <p class="small float-left text-muted pr-2">
+                  <%= gossip.comments.count %> 
                   <a href="<%= gossip_path(gossip.id) %>">
-                    <p class="small float-left text-muted pr-2"><%= gossip.comments.count %> 💬</p> 
-                  </a>
-                  <a href="<%= gossip_path(gossip.id) %>">
-                    <p class="small float-left text-muted"><%= gossip.comments.count %> 🤍</p>
-                  </a>
-                  <p class="small text-right text-muted">Posté par <%= link_to "#{gossip.user.first_name}", user_path(gossip.user.id) %></p>
-                </div>
+                  <i class="far fa-comment-dots"></i></a>
+                </p> 
+                <p class="small float-left text-muted">
+                  <%= gossip.likes.count %>
+                  <% if current_user == nil %>
+                    <%= link_to "<i class='far fa-heart'></i>".html_safe, gossip_likes_path(gossip.id), method: :post %>
+                  <% else %>
+                    <% pre_like = gossip.likes.find { |like| like.user_id == current_user.id} %>
+                    <% if pre_like %>
+                      <%= link_to "<i class='fas fa-heart'></i>".html_safe, gossip_like_path(gossip.id, pre_like), method: :delete %>
+                    <% else %>
+                      <%= link_to "<i class='far fa-heart'></i>".html_safe, gossip_likes_path(gossip.id), method: :post %>
+                    <% end %>
+                  <% end %>
+                </p>
+
+                <p class="small float-right text-muted">Posté par <%= link_to "#{gossip.user.first_name}", user_path(gossip.user.id) %></p>
+              </div>
+
+
+
               </div>
             </div>
           <% end %>

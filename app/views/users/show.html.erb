@@ -2,10 +2,11 @@
   <head>
   </head>
   <body>
-    <div class="container py-4 text-center">
-    <% user = User.find(params['id']) %>
-      <h1 style="color: #053557">Profil de <%= user.first_name %> <%= user.last_name %></h1>
-      <br>
+    <div class="container py-5 text-center">
+      <% user = User.find(params['id']) %>
+      <h1 style="color: #053557" class="pb-3">Profil de <%= user.first_name %> <%= user.last_name %></h1>
+      <br/>
+      
       <div class="card flex-row flex-wrap flex-lg-nowrap mx-5 p-3">
         <img class="m-auto p-1" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/512px-Circle-icons-profile.svg.png" alt="profile picture" height="200px" width="200px">
         <div class="card-body text-left my-auto">
