@@ -7,6 +7,7 @@ Tag.destroy_all
 JoinTableTagGossip.destroy_all
 PrivateMessage.destroy_all
 Comment.destroy_all
+Like.destroy_all
 
 10.times do
   city = City.create!(
@@ -40,7 +41,7 @@ puts "Tags créés"
   gossip = Gossip.create!(
     title: Faker::Book.title,
     content: Faker::Quote.unique.famous_last_words,
-    user: User.all.sample,
+    user: User.all.sample
   )
 end
 
@@ -48,7 +49,7 @@ end
   gossip = Gossip.create!(
     title: Faker::Book.title,
     content: Faker::Movie.unique.quote,
-    user: User.all.sample,
+    user: User.all.sample
   )
 end
 puts "Gossips créés"
@@ -76,3 +77,15 @@ end
   )
 end
 puts "Commentaires créés"
+
+120.times do
+  begin
+  like = Like.create!(
+    user: User.all.sample,
+    gossip: Gossip.all.sample
+  )
+  rescue
+    next
+  end
+end
+puts "Likes créés"
