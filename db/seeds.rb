@@ -14,6 +14,7 @@ Comment.destroy_all
     zip_code: Faker::Address.zip_code
   )
 end
+puts "Villes créées"
 
 10.times do
   user = User.create!(
@@ -26,12 +27,14 @@ end
     password: Faker::Lorem.characters(number: 10)
   )
 end
+puts "Utilisateurs créés"
 
 10.times do
   tag = Tag.create!(
     title: "#" + Faker::Lorem.word
   )
 end
+puts "Tags créés"
 
 10.times do
   gossip = Gossip.create!(
@@ -48,6 +51,7 @@ end
     user: User.all.sample,
   )
 end
+puts "Gossips créés"
 
 30.times do
   join_tag_gossip = JoinTableTagGossip.create!(
@@ -71,3 +75,4 @@ end
     user: User.all.sample
   )
 end
+puts "Commentaires créés"

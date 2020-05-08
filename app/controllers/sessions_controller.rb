@@ -18,7 +18,10 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    log_out(user)
+    session.delete(:user_id)
+    user.update(remember_digest: nil)
+    cookies.delete(:user_id)
+    cookies.delete(:remember_token)
     flash[:danger] = 'Vous vous êtes déconnectés.'
     redirect_to "/"
   end
