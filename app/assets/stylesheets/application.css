@@ -25,4 +25,5 @@
  .jumbotron {
     background-image: url("");
     background-size: cover;
+    max-height: 260px;
 }

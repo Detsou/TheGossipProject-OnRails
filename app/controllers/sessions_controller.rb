@@ -7,17 +7,18 @@ class SessionsController < ApplicationController
     user = User.find_by(email: user_params[:email])
 
     if user && user.authenticate(user_params[:password])
-      session[:user_id] = user.id
+      log_in(user)
+      remember(user)
       flash[:success] = "Hello #{user.first_name} !"
       redirect_to "/"
     else
-      flash[:danger] = 'Email ou mot de passe invalide.'
+      flash.now[:danger] = 'Email ou mot de passe invalide.'
       render :new
       end
   end
 
   def destroy
-    session.delete(:user_id)
+    log_out(user)
     flash[:danger] = 'Vous vous êtes déconnectés.'
     redirect_to "/"
   end
