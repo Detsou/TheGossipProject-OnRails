@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
     if user && user.authenticate(user_params[:password])
       log_in(user)
       remember(user) if user_params[:remember_me] == "1"
-      flash[:success] = "Hello #{user.first_name} ! #{params.inspect}"
+      flash[:success] = "Hello #{user.first_name} !"
       redirect_to "/"
     else
       flash.now[:danger] = 'Email ou mot de passe invalide.'
