@@ -3,6 +3,7 @@ class Gossip < ApplicationRecord
   has_many :join_table_tag_gossips
   has_many :tags, through: :join_table_tag_gossips
   has_many :comments
+  has_many :likes, dependent: :destroy
 
   validates :title,
     presence: { message: "Titre obligatoire." },

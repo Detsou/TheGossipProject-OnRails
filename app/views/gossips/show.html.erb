@@ -11,6 +11,20 @@
           <p><%= @gossip.content %></p>
         </div>
         <div class="card-footer">
+          <p class="small float-left text-muted pr-2">
+            <%= @gossip.comments.count %> 
+            <a href="#">
+            <i class="far fa-comment-dots"></i></a>
+          </p> 
+          <p class="small float-left text-muted">
+            <%= @gossip.likes.count %>
+            <% pre_like = @gossip.likes.find { |like| like.user_id == current_user.id} %>
+            <% if pre_like %>
+              <%= link_to "<i class='fas fa-heart'></i>".html_safe, gossip_like_path(@gossip.id, pre_like), method: :delete %>
+            <% else %>
+              <%= link_to "<i class='far fa-heart'></i>".html_safe, gossip_likes_path(@gossip.id), method: :post %>
+            <% end %>
+          </p>
           <p class="small text-right text-muted">
             Posté par <%= link_to "#{@gossip.user.first_name} #{@gossip.user.last_name}", user_path(@gossip.user.id) %> (<%= link_to "#{@gossip.user.city.name}", city_path(@gossip.user.city.id) %>), le <%= @gossip.created_at.strftime("%d/%m/%Y") %> à <%= @gossip.created_at.strftime("%H:%M") %>.
           </p>
@@ -52,10 +66,11 @@
         <% @gossip.comments.each do |comment| %>
             <div class="card my-2">
               <div class="card-body<%= " text-right" if x % 2 == 0 %>">
-                <p class="small text-muted">
-                  Commenté par <%= link_to "#{comment.user.first_name} #{comment.user.last_name}", user_path(@gossip.user.id) %> (<%= link_to "#{comment.user.city.name}", city_path(comment.user.city.id) %>), le <%= comment.created_at.strftime("%d/%m/%Y") %> à <%= comment.created_at.strftime("%H:%M") %>.
+                <p class="small text-muted mb-1">
+                  Commenté par <%= link_to "#{comment.user.first_name} #{comment.user.last_name}", user_path(@gossip.user.id) %> (<%= link_to "#{comment.user.city.name}", city_path(comment.user.city.id) %>), le <%= comment.created_at.strftime("%d/%m/%Y") %> à <%= comment.created_at.strftime("%H:%M") %>. 
                   <% if current_user?(comment.user) %>
-                  <%= link_to "∅", edit_comment_path(comment.id), style:"color: green;" %> <%= link_to "X", edit_comment_path(comment.id), style:"color: red;" %>
+                  <a href="<%= edit_comment_path(comment.id) %>", style="color: green"><i class="far fa-edit ml-1"></i></a>
+                  <a href="<%= comment_path(comment.id) %>", style="color: red", data-confirm="Êtes-vous sûrs de vouloir supprimer ce commentaire ?", data-method="DELETE"><i class="far fa-trash-alt"></i></a>
                   <% end %>
                 </p>
                 <p><%= comment.content %></p>

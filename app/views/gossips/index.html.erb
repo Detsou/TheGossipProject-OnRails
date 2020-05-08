@@ -8,31 +8,47 @@
         <p class="lead text-center pt-2">Ou la poésie de vos doux petits mots</p>
       </div>
 
+    
     <div class="container py-5 text-center">
+    <!-- CARTE DECK GOSSIP -->
       <div class="card-deck">
         <% Gossip.all.each do |gossip| %>
           <div class="col-lg-4 col-md-6 mb-3">
             <div class="card text-left my-3">
+
+              <!-- CARTE BODY GOSSIP -->
               <div class="card-body">
                 <h5 class="card-title bold">
                   <%= link_to "#{gossip.id}. #{gossip.title}", gossip_path(gossip.id) %>
                 </h5>
                 <p class="card-text"><%= gossip.content %></p>
               </div>
+
+              <!-- CARTE FOOTER GOSSIP -->
               <div class="card-footer">
-                <a href="<%= gossip_path(gossip.id) %>">
-                  <p class="small float-left text-muted pr-2"><%= gossip.comments.count %> 💬</p> 
-                </a>
-                <a href="<%= gossip_path(gossip.id) %>">
-                  <p class="small float-left text-muted"><%= gossip.comments.count %> 🤍</p>
-                </a>
+                <p class="small float-left text-muted pr-2">
+                  <%= gossip.comments.count %> 
+                  <a href="<%= gossip_path(gossip.id) %>">
+                  <i class="far fa-comment-dots"></i></a>
+                </p> 
+                <p class="small float-left text-muted">
+                  <%= gossip.likes.count %>
+                  <% pre_like = gossip.likes.find { |like| like.user_id == current_user.id} %>
+                  <% if pre_like %>
+                    <%= link_to "<i class='fas fa-heart'></i>".html_safe, gossip_like_path(gossip.id, pre_like), method: :delete %>
+                  <% else %>
+                    <%= link_to "<i class='far fa-heart'></i>".html_safe, gossip_likes_path(gossip.id), method: :post %>
+                  <% end %>
+                </p>
+
                 <p class="small float-right text-muted">Posté par <%= link_to "#{gossip.user.first_name}", user_path(gossip.user.id) %></p>
               </div>
+
             </div>
           </div>
         <% end %>
       </div>
-
+      <!-- CARTE DECK GOSSIP -->
     </div>
   </body>
 </html>
