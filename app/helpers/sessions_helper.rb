@@ -42,7 +42,6 @@ module SessionsHelper
 
     cookies.permanent[:user_id] = user.id
     cookies.permanent[:remember_token] = remember_token
-
   end
 
   def forget(user)
