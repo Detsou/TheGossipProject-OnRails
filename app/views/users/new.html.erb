@@ -4,7 +4,7 @@
 
   <body>
     <% if @user.errors.any? %>
-      <div class="container alert alert-danger mt-3 pt-3 pb-1" role="alert">
+      <div class="alert alert-danger pt-3 pb-1 pl-5" role="alert">
           <p>Nous n'avons pas réussi à créer votre compte pour la (ou les) raison(s) suivante(s) :</p>
           <ul>
             <% @user.errors.each_with_index do |message, i| %>
@@ -40,12 +40,12 @@
           <div class="form-group">
             <%= f.password_field :password_confirmation, class: 'form-control', placeholder: 'Confirmation de mot de passe' %>
           </div>
-          <div class="btn-toolbar mx-3" role="toolbar" aria-label="Toolbar with button groups">
+          <div class="btn-toolbar mx-3 flex-nowrap" role="toolbar" aria-label="Toolbar with button groups">
             <div class="btn-group mr-2" role="group">
               <a href="<%= root_path %>" class="btn btn-dark mx-1">Retour</a>
             </div>
             <div class="btn-group mr-2" role="group">
-              <button type="submit" class="btn btn-success mx-1">Modifier</button>
+              <button type="submit" class="btn btn-success mx-1">S'inscrire</button>
             </div>
           </div>
         <% end %>

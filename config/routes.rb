@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   root 'gossips#index'
   get '/welcome/:id', to: 'welcome#show', as: 'welcome'
   get '/users', to: 'users#new'
+  get '/sessions', to: 'sessions#new'
   get '/contact', to: 'welcome#contact'
   get '/team', to: 'welcome#team'
 end

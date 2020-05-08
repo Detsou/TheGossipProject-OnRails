@@ -3,7 +3,7 @@
   </head>
   <body>
     <% if @gossip.errors.any? %>
-    <div class="container alert alert-danger mt-3 pt-3 pb-1" role="alert">
+    <div class="alert alert-danger pt-3 pb-1 text-center" role="alert">
         <p>Nous n'avons pas réussi à modifier le gossip pour la (ou les) raison(s) suivante(s) :</p>
         <ul>
           <% @gossip.errors.each_with_index do |message, i| %>

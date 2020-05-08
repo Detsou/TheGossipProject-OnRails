@@ -31,3 +31,18 @@
 
 en:
   hello: "Hello world"
+  activerecord:
+    attributes:
+      user:
+        password: "Mot de passe"
+        city: "Ville"
+    errors:
+      models:
+        user:
+          attributes:
+            password:
+              blank: "Mot de passe obligatoire."
+            city:
+              required: "Ville obligatoire"
+            password_confirmation:
+              confirmation: "Vos deux mots de passe ne sont pas identiques."

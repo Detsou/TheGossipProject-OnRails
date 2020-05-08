@@ -24,7 +24,7 @@ class CommentsController < ApplicationController
       redirect_to @gossip
     else
       flash[:danger] = "Ton commentaire ne respecte pas le format adapté."
-      redirect_to "/"
+      redirect_to @gossip
     end
   end
 

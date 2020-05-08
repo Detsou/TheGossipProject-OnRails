@@ -7,6 +7,15 @@ class User < ApplicationRecord
 
   has_secure_password
 
+  validates :first_name,
+    presence: { message: "Prénom obligatoire." }
+
+  validates :last_name,
+    presence: { message: "Nom obligatoire." }
+
+  validates :age,
+    presence: { message: "Age obligatoire." }
+
   validates :password,
     presence: { message: "Mot de passe obligatoire." },
     length: { minimum: 6, too_short: "Mot de passe trop court." }
@@ -15,9 +24,6 @@ class User < ApplicationRecord
     presence: { message: "Email obligatoire." },
     uniqueness: { message: "Email déjà pris." },
     format: { with: /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/, message: "Format d'email invalide." }
-
-  validates :city_id,
-    presence: { message: "Ville obligatoire."}
 
   def full_name
     "#{first_name} #{last_name}"
