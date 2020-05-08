@@ -16,13 +16,20 @@
           <div class="form-group">
             <%= f.password_field :password, class: 'form-control', placeholder: 'Mot de passe' %>
           </div>
-
-          <div class="btn-toolbar mx-3 flex-nowrap" role="toolbar" aria-label="Toolbar with button groups">
-            <div class="btn-group mr-2" role="group">
-              <a href="<%= gossips_path %>" class="btn btn-dark mx-1">Retour</a>
+          <div class="d-flex justify-content-between">
+            <div class="form-check mt-1">
+              <%= f.check_box :remember_me, id:"defaultCheck1"%>
+              <label class="form-check-label" for="defaultCheck1"> Se souvenir de moi</label>
             </div>
-            <div class="btn-group mr-2" role="group">
-              <%= submit_tag "Se connecter", class: "btn btn-success mx-1" %> 
+
+
+            <div class="btn-toolbar flex-nowrap justify-content-end mt-2" role="toolbar" aria-label="Toolbar with button groups">
+              <div class="btn-group mr-2" role="group">
+                <a href="<%= gossips_path %>" class="btn btn-dark mx-1">Retour</a>
+              </div>
+              <div class="btn-group mr-2" role="group">
+                <%= submit_tag "Se connecter", class: "btn btn-success mx-1" %> 
+              </div>
             </div>
           </div>
 
